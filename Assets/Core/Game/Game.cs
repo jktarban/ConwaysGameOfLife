@@ -4,6 +4,9 @@ public class Game : MonoBehaviour
 {
     private static int GRID_WIDTH = 50;
     private static int GRID_HEIGHT = 20;
+    private Color _blockColor = Color.red;
+    private float _speed = 10f;
+
     [SerializeField]
     private GameObject _prefab;
     [SerializeField]
@@ -34,6 +37,7 @@ public class Game : MonoBehaviour
                 var block = Instantiate(_prefab, new Vector2(width, height), Quaternion.identity).GetComponent<Block>();
                 _grid[width, height] = block;
                 block.SetAlive(GetIsAlive());
+                block.SetColor(_blockColor);
             }
         }
     }
