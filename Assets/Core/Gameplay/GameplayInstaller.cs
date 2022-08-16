@@ -12,5 +12,9 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<GameplayModel>().AsSingle();
         Container.Bind<GameplayView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle().NonLazy();
+
+        Container.Bind<MenuModel>().AsSingle();
+        Container.Bind<MenuView>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<MenuManager>().AsSingle().NonLazy();
     }
 }

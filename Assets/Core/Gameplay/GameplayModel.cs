@@ -8,7 +8,7 @@ public class GameplayModel
 
     private float _timer = 0;
     private BlockManager[,] _grid;
-    private bool _isGameStarted = false;
+    private bool _isGameStart = false;
     [Inject]
     private BlockFactory blockFactory;
 
@@ -25,8 +25,11 @@ public class GameplayModel
                 _grid[width, height] = blockManager;
             }
         }
+    }
 
-        _isGameStarted = true;
+    public void IsGameStart(bool isGameStart)
+    {
+        _isGameStart = isGameStart;
     }
    
 
@@ -51,7 +54,7 @@ public class GameplayModel
    
     public void Tick()
     {
-        if (!_isGameStarted)
+        if (!_isGameStart)
         {
             return;
         }

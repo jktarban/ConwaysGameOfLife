@@ -1,20 +1,21 @@
 using Zenject;
 
-public class GameplayManager : IInitializable, ITickable
+public class GameplayManager : ITickable
 {
     private readonly GameplayView _gameplayView;
     private readonly GameplayModel _gameplayModel;
 
-    public GameplayManager(GameplayView gameView, GameplayModel gameModel)
+    public GameplayManager(GameplayView gameplayView, GameplayModel gameplayModel)
     {
-        _gameplayView = gameView;
-        _gameplayModel = gameModel;
+        _gameplayView = gameplayView;
+        _gameplayModel = gameplayModel;
     }
 
-    public void Initialize()
+    public void StartGame()
     {
         _gameplayModel.PopulateBlocks();
         AdjustCamera();
+        _gameplayModel.IsGameStart(true);
     }
 
     public void AdjustCamera()
