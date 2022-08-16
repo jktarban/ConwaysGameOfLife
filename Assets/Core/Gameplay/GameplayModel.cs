@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Game : MonoBehaviour
+public class GameplayModel
 {
     private const int GRID_WIDTH = 200;
     private const int GRID_HEIGHT = 50;
@@ -11,38 +11,7 @@ public class Game : MonoBehaviour
     private const int OVER_POPULATION_COUNT = 3;
     private const int CELL_SIZE = 1;
     private const float ALIVE_PERCENT = 20f;
-
-    [SerializeField]
-    private GameObject _prefab;
-    [SerializeField]
-    private Camera _camera;
-
     private Block[,] _grid = new Block[GRID_WIDTH, GRID_HEIGHT];
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        PopulateBlocks();
-        AdjustCamera();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (_timer >= _speed)
-        {
-            _timer = 0;
-            CountNeighbors();
-            PopulationControl();
-        }
-        else
-        {
-            _timer += Time.deltaTime;
-        }
-
-
-    }
 
     private void CountNeighbors()
     {
@@ -169,13 +138,13 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void PopulateBlocks()
+    public void PopulateBlocks(GameObject blockPrefab)
     {
         for (int height = 0; height < GRID_HEIGHT; height++)
         {
             for (int width = 0; width < GRID_WIDTH; width++)
             {
-                var block = Instantiate(_prefab, new Vector2(width, height), Quaternion.identity).GetComponent<Block>();
+                var block = Object.Instantiate(blockPrefab, new Vector2(width, height), Quaternion.identity).GetComponent<Block>();
                 _grid[width, height] = block;
                 block.SetAlive(GetIsAlive());
                 block.SetColor(_blockColor);
@@ -185,24 +154,38 @@ public class Game : MonoBehaviour
 
     //fit grid on camera
     //reference https://stackoverflow.com/a/71013983
-    private void AdjustCamera()
+    public void AdjustCamera(Camera camera)
     {
         //center the camera
-        _camera.transform.position = new Vector3(_grid.GetLength(0) / 2, _grid.GetLength(1) / 2, _camera.transform.position.z);
+        camera.transform.position = new Vector3(_grid.GetLength(0) / 2, _grid.GetLength(1) / 2, camera.transform.position.z);
 
-        if(GRID_WIDTH > GRID_HEIGHT * _camera.aspect)
+        if (GRID_WIDTH > GRID_HEIGHT * camera.aspect)
         {
-            _camera.orthographicSize = ((float)GRID_WIDTH / (float)_camera.pixelWidth * _camera.pixelHeight) / 2;
+            camera.orthographicSize = ((float)GRID_WIDTH / (float)camera.pixelWidth * camera.pixelHeight) / 2;
         }
         else
         {
-            _camera.orthographicSize = GRID_HEIGHT / 2;
+            camera.orthographicSize = GRID_HEIGHT / 2;
+        }
+    }
+
+    public void Tick()
+    {
+        if (_timer >= _speed)
+        {
+            _timer = 0;
+            CountNeighbors();
+            PopulationControl();
+        }
+        else
+        {
+            _timer += Time.deltaTime;
         }
     }
 
     private bool GetIsAlive()
     {
-        if (Random.value > (1 - (ALIVE_PERCENT/100)))
+        if (Random.value > (1 - (ALIVE_PERCENT / 100)))
         {
             return true;
         }
