@@ -2,10 +2,6 @@ using UnityEngine;
 using Zenject;
 public class GameplayModel
 {
-    private const int UNDER_POPULATION_COUNT = 2;
-    private const int OVER_POPULATION_COUNT = 3;
-    private const int CELL_SIZE = 1;
-
     private float _timer = 0;
     private BlockManager[,] _grid;
     private bool _isGameStart = false;
@@ -92,7 +88,7 @@ public class GameplayModel
                 var numNeighbors = 0;
 
                 //North
-                if (height + CELL_SIZE < GameManager.GridHeight)
+                if (height + GameSettings.Instance.CellSize < GameManager.GridHeight)
                 {
                     if (_grid[width, height + 1].IsAlive)
                     {
@@ -101,63 +97,63 @@ public class GameplayModel
                 }
 
                 //EAST
-                if (width + CELL_SIZE < GameManager.GridWidth)
+                if (width + GameSettings.Instance.CellSize < GameManager.GridWidth)
                 {
-                    if (_grid[width + CELL_SIZE, height].IsAlive)
+                    if (_grid[width + GameSettings.Instance.CellSize, height].IsAlive)
                     {
                         numNeighbors++;
                     }
                 }
 
                 //SOUTH
-                if (height - CELL_SIZE >= 0)
+                if (height - GameSettings.Instance.CellSize >= 0)
                 {
-                    if (_grid[width, height - CELL_SIZE].IsAlive)
+                    if (_grid[width, height - GameSettings.Instance.CellSize].IsAlive)
                     {
                         numNeighbors++;
                     }
                 }
 
                 //WEST
-                if (width - CELL_SIZE >= 0)
+                if (width - GameSettings.Instance.CellSize >= 0)
                 {
-                    if (_grid[width - CELL_SIZE, height].IsAlive)
+                    if (_grid[width - GameSettings.Instance.CellSize, height].IsAlive)
                     {
                         numNeighbors++;
                     }
                 }
 
                 //NORTHEAST
-                if (width + CELL_SIZE < GameManager.GridWidth && height + CELL_SIZE < GameManager.GridHeight)
+                if (width + GameSettings.Instance.CellSize < GameManager.GridWidth && height + GameSettings.Instance.CellSize < GameManager.GridHeight)
                 {
-                    if (_grid[width + CELL_SIZE, height + CELL_SIZE].IsAlive)
+                    if (_grid[width + GameSettings.Instance.CellSize, height + GameSettings.Instance.CellSize].IsAlive)
                     {
                         numNeighbors++;
                     }
                 }
 
                 //NORTHWEST
-                if (width - CELL_SIZE >= 0 && height + CELL_SIZE < GameManager.GridHeight)
+                if (width - GameSettings.Instance.CellSize >= 0 && height + GameSettings.Instance.CellSize < GameManager.GridHeight)
                 {
-                    if (_grid[width - CELL_SIZE, height + CELL_SIZE].IsAlive)
+                    if (_grid[width - GameSettings.Instance.CellSize, height + GameSettings.Instance.CellSize].IsAlive)
                     {
                         numNeighbors++;
                     }
                 }
 
                 //SOUTHEAST
-                if (width + CELL_SIZE < GameManager.GridWidth && height - CELL_SIZE >= 0)
+                if (width + GameSettings.Instance.CellSize < GameManager.GridWidth && height - GameSettings.Instance.CellSize >= 0)
                 {
-                    if (_grid[width + CELL_SIZE, height - CELL_SIZE].IsAlive)
+                    if (_grid[width + GameSettings.Instance.CellSize, height - GameSettings.Instance.CellSize].IsAlive)
                     {
                         numNeighbors++;
                     }
                 }
 
                 //SOUTHWEST
-                if (width - CELL_SIZE >= 0 && height - CELL_SIZE >= 0)
+                if (width - GameSettings.Instance.CellSize >= 0 && height - GameSettings.Instance.CellSize >= 0)
                 {
-                    if (_grid[width - CELL_SIZE, height - CELL_SIZE].IsAlive)
+                    if (_grid[width - GameSettings.Instance.CellSize, height - GameSettings.Instance.CellSize].IsAlive)
                     {
                         numNeighbors++;
                     }
@@ -180,19 +176,19 @@ public class GameplayModel
                 {
                    
                     //RULE 1 underpopulation
-                    if (_grid[width, height].NumNeighbors < UNDER_POPULATION_COUNT)
+                    if (_grid[width, height].NumNeighbors < GameSettings.Instance.UnderPopulationCount)
                     {
                         _grid[width, height].IsAlive = false;
                     }
 
                     //RULE 2 lives to next generation
-                    if (_grid[width, height].NumNeighbors >= UNDER_POPULATION_COUNT && _grid[width, height].NumNeighbors == OVER_POPULATION_COUNT)
+                    if (_grid[width, height].NumNeighbors >= GameSettings.Instance.UnderPopulationCount && _grid[width, height].NumNeighbors == GameSettings.Instance.OverPopulationCount)
                     {
                         _grid[width, height].IsAlive = true;
                     }
 
                     //RULE 3 overpopulation
-                    if (_grid[width, height].NumNeighbors > OVER_POPULATION_COUNT)
+                    if (_grid[width, height].NumNeighbors > GameSettings.Instance.OverPopulationCount)
                     {
                         _grid[width, height].IsAlive = false;
                     }
@@ -200,7 +196,7 @@ public class GameplayModel
                 else
                 {
                     //RULE 4 reproduction
-                    if (_grid[width, height].NumNeighbors == OVER_POPULATION_COUNT)
+                    if (_grid[width, height].NumNeighbors == GameSettings.Instance.OverPopulationCount)
                     {
                         _grid[width, height].IsAlive = true;
                     }
