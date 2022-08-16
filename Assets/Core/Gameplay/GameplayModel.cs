@@ -52,6 +52,24 @@ public class GameplayModel
         }
     }
 
+    public Vector2 GetCameraPosition
+    {
+        get
+        {
+            return new Vector2(_grid.GetLength(0) / 2, _grid.GetLength(1) / 2);
+        }
+    }
+
+    public float GetCameraOrthoSize(float cameraAspect, float pixelWidth, float pixelHeight)
+    {
+        if (GameManager.GridWidth > GameManager.GridHeight * cameraAspect)
+        {
+            return (GameManager.GridWidth / (float)pixelWidth * pixelHeight) / 2;
+        }
+
+        return GameManager.GridHeight / 2;
+    }
+
     private void CountNeighbors()
     {
         for (int height = 0; height < GameManager.GridHeight; height++)

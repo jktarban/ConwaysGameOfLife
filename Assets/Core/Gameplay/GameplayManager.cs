@@ -15,7 +15,12 @@ public class GameplayManager : IInitializable, ITickable
     public void Initialize()
     {
         _gameModel.PopulateBlocks(_gameView.BlockPrefab);
-        _gameModel.AdjustCamera(_gameView.Camera);
+        AdjustCamera();
+    }
+
+    public void AdjustCamera()
+    {
+        _gameView.SetCamera(_gameModel.GetCameraOrthoSize(_gameView.Camera.aspect, _gameView.Camera.pixelWidth, _gameView.Camera.pixelHeight), _gameModel.GetCameraPosition);
     }
 
     public void Tick()
