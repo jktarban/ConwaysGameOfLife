@@ -2,27 +2,66 @@ using UnityEngine;
 
 public class GameplayModel
 {
-    private const int GRID_WIDTH = 200;
-    private const int GRID_HEIGHT = 50;
-    private Color _blockColor = Color.red;
-    private float _speed = 0.1f;
-    private float _timer = 0;
     private const int UNDER_POPULATION_COUNT = 2;
     private const int OVER_POPULATION_COUNT = 3;
     private const int CELL_SIZE = 1;
-    private const float ALIVE_PERCENT = 20f;
-    private Block[,] _grid = new Block[GRID_WIDTH, GRID_HEIGHT];
+
+    private float _timer = 0;
+    private Block[,] _grid;
+
+    public void PopulateBlocks(GameObject blockPrefab)
+    {
+        _grid = new Block[GameManager.GridWidth, GameManager.GridHeight];
+
+        for (int height = 0; height < GameManager.GridHeight; height++)
+        {
+            for (int width = 0; width < GameManager.GridWidth; width++)
+            {
+                var block = Object.Instantiate(blockPrefab, new Vector2(width, height), Quaternion.identity).GetComponent<Block>();
+                _grid[width, height] = block;
+                block.SetAlive(GetIsAlive(GameManager.AlivePercent));
+                block.SetColor(GameManager.BlockColor);
+            }
+        }
+    }
+
+    private bool GetIsAlive(float alivePercent)
+    {
+        if (Random.value > (1 - (alivePercent / 100)))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    //fit grid on camera
+    //reference https://stackoverflow.com/a/71013983
+    public void AdjustCamera(Camera camera)
+    {
+        //center the camera
+        camera.transform.position = new Vector3(_grid.GetLength(0) / 2, _grid.GetLength(1) / 2, camera.transform.position.z);
+
+        if (GameManager.GridWidth > GameManager.GridHeight * camera.aspect)
+        {
+            camera.orthographicSize = ((float)GameManager.GridWidth / (float)camera.pixelWidth * camera.pixelHeight) / 2;
+        }
+        else
+        {
+            camera.orthographicSize = GameManager.GridHeight / 2;
+        }
+    }
 
     private void CountNeighbors()
     {
-        for (int height = 0; height < GRID_HEIGHT; height++)
+        for (int height = 0; height < GameManager.GridHeight; height++)
         {
-            for (int width = 0; width < GRID_WIDTH; width++)
+            for (int width = 0; width < GameManager.GridWidth; width++)
             {
                 var numNeighbors = 0;
 
                 //North
-                if (height + CELL_SIZE < GRID_HEIGHT)
+                if (height + CELL_SIZE < GameManager.GridHeight)
                 {
                     if (_grid[width, height + 1].IsAlive)
                     {
@@ -31,7 +70,7 @@ public class GameplayModel
                 }
 
                 //EAST
-                if (width + CELL_SIZE < GRID_WIDTH)
+                if (width + CELL_SIZE < GameManager.GridWidth)
                 {
                     if (_grid[width + CELL_SIZE, height].IsAlive)
                     {
@@ -58,7 +97,7 @@ public class GameplayModel
                 }
 
                 //NORTHEAST
-                if (width + CELL_SIZE < GRID_WIDTH && height + CELL_SIZE < GRID_HEIGHT)
+                if (width + CELL_SIZE < GameManager.GridWidth && height + CELL_SIZE < GameManager.GridHeight)
                 {
                     if (_grid[width + CELL_SIZE, height + CELL_SIZE].IsAlive)
                     {
@@ -67,7 +106,7 @@ public class GameplayModel
                 }
 
                 //NORTHWEST
-                if (width - CELL_SIZE >= 0 && height + CELL_SIZE < GRID_HEIGHT)
+                if (width - CELL_SIZE >= 0 && height + CELL_SIZE < GameManager.GridHeight)
                 {
                     if (_grid[width - CELL_SIZE, height + CELL_SIZE].IsAlive)
                     {
@@ -76,7 +115,7 @@ public class GameplayModel
                 }
 
                 //SOUTHEAST
-                if (width + CELL_SIZE < GRID_WIDTH && height - CELL_SIZE >= 0)
+                if (width + CELL_SIZE < GameManager.GridWidth && height - CELL_SIZE >= 0)
                 {
                     if (_grid[width + CELL_SIZE, height - CELL_SIZE].IsAlive)
                     {
@@ -102,9 +141,9 @@ public class GameplayModel
 
     private void PopulationControl()
     {
-        for (int height = 0; height < GRID_HEIGHT; height++)
+        for (int height = 0; height < GameManager.GridHeight; height++)
         {
-            for (int width = 0; width < GRID_WIDTH; width++)
+            for (int width = 0; width < GameManager.GridWidth; width++)
             {
                 if (_grid[width, height].IsAlive)
                 {
@@ -138,40 +177,9 @@ public class GameplayModel
         }
     }
 
-    public void PopulateBlocks(GameObject blockPrefab)
-    {
-        for (int height = 0; height < GRID_HEIGHT; height++)
-        {
-            for (int width = 0; width < GRID_WIDTH; width++)
-            {
-                var block = Object.Instantiate(blockPrefab, new Vector2(width, height), Quaternion.identity).GetComponent<Block>();
-                _grid[width, height] = block;
-                block.SetAlive(GetIsAlive());
-                block.SetColor(_blockColor);
-            }
-        }
-    }
-
-    //fit grid on camera
-    //reference https://stackoverflow.com/a/71013983
-    public void AdjustCamera(Camera camera)
-    {
-        //center the camera
-        camera.transform.position = new Vector3(_grid.GetLength(0) / 2, _grid.GetLength(1) / 2, camera.transform.position.z);
-
-        if (GRID_WIDTH > GRID_HEIGHT * camera.aspect)
-        {
-            camera.orthographicSize = ((float)GRID_WIDTH / (float)camera.pixelWidth * camera.pixelHeight) / 2;
-        }
-        else
-        {
-            camera.orthographicSize = GRID_HEIGHT / 2;
-        }
-    }
-
     public void Tick()
     {
-        if (_timer >= _speed)
+        if (_timer >= GameManager.Speed)
         {
             _timer = 0;
             CountNeighbors();
@@ -181,15 +189,5 @@ public class GameplayModel
         {
             _timer += Time.deltaTime;
         }
-    }
-
-    private bool GetIsAlive()
-    {
-        if (Random.value > (1 - (ALIVE_PERCENT / 100)))
-        {
-            return true;
-        }
-
-        return false;
     }
 }
