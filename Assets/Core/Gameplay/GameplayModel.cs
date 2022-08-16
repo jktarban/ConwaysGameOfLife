@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Zenject;
 public class GameplayModel
 {
     private const int UNDER_POPULATION_COUNT = 2;
@@ -7,33 +7,28 @@ public class GameplayModel
     private const int CELL_SIZE = 1;
 
     private float _timer = 0;
-    private Block[,] _grid;
+    private BlockManager[,] _grid;
+    private bool _isGameStarted = false;
+    [Inject]
+    private BlockFactory blockFactory;
 
-    public void PopulateBlocks(GameObject blockPrefab)
+    public void PopulateBlocks()
     {
-        _grid = new Block[GameManager.GridWidth, GameManager.GridHeight];
+        _grid = new BlockManager[GameManager.GridWidth, GameManager.GridHeight];
 
         for (int height = 0; height < GameManager.GridHeight; height++)
         {
             for (int width = 0; width < GameManager.GridWidth; width++)
             {
-                var block = Object.Instantiate(blockPrefab, new Vector2(width, height), Quaternion.identity).GetComponent<Block>();
-                _grid[width, height] = block;
-                block.SetAlive(GetIsAlive(GameManager.AlivePercent));
-                block.SetColor(GameManager.BlockColor);
+                var blockManager = blockFactory.Create().BlockManager;
+                blockManager.SetBlockPosition(new Vector2(width, height));
+                _grid[width, height] = blockManager;
             }
         }
-    }
 
-    private bool GetIsAlive(float alivePercent)
-    {
-        if (Random.value > (1 - (alivePercent / 100)))
-        {
-            return true;
-        }
-
-        return false;
+        _isGameStarted = true;
     }
+   
 
     public Vector2 GetCameraPosition
     {
@@ -51,6 +46,26 @@ public class GameplayModel
         }
 
         return GameManager.GridHeight / 2;
+    }
+
+   
+    public void Tick()
+    {
+        if (!_isGameStarted)
+        {
+            return;
+        }
+
+        if (_timer >= GameManager.Speed)
+        {
+            _timer = 0;
+            CountNeighbors();
+            PopulationControl();
+        }
+        else
+        {
+            _timer += Time.deltaTime;
+        }
     }
 
     private void CountNeighbors()
@@ -138,32 +153,33 @@ public class GameplayModel
         }
     }
 
-
-
     private void PopulationControl()
     {
+       
         for (int height = 0; height < GameManager.GridHeight; height++)
         {
             for (int width = 0; width < GameManager.GridWidth; width++)
             {
+
                 if (_grid[width, height].IsAlive)
                 {
+                   
                     //RULE 1 underpopulation
                     if (_grid[width, height].NumNeighbors < UNDER_POPULATION_COUNT)
                     {
-                        _grid[width, height].SetAlive(false);
+                        _grid[width, height].IsAlive = false;
                     }
 
                     //RULE 2 lives to next generation
                     if (_grid[width, height].NumNeighbors >= UNDER_POPULATION_COUNT && _grid[width, height].NumNeighbors == OVER_POPULATION_COUNT)
                     {
-                        _grid[width, height].SetAlive(true);
+                        _grid[width, height].IsAlive = true;
                     }
 
                     //RULE 3 overpopulation
                     if (_grid[width, height].NumNeighbors > OVER_POPULATION_COUNT)
                     {
-                        _grid[width, height].SetAlive(false);
+                        _grid[width, height].IsAlive = false;
                     }
                 }
                 else
@@ -171,24 +187,10 @@ public class GameplayModel
                     //RULE 4 reproduction
                     if (_grid[width, height].NumNeighbors == OVER_POPULATION_COUNT)
                     {
-                        _grid[width, height].SetAlive(true);
+                        _grid[width, height].IsAlive = true;
                     }
                 }
             }
-        }
-    }
-
-    public void Tick()
-    {
-        if (_timer >= GameManager.Speed)
-        {
-            _timer = 0;
-            CountNeighbors();
-            PopulationControl();
-        }
-        else
-        {
-            _timer += Time.deltaTime;
         }
     }
 }

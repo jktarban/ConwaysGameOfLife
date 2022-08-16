@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba3ee617cc938746bee7fddcfb2e1da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockPrefab: {fileID: 7457572445569342514, guid: 46e1bce8d4efbb44cb941f2460ad516f, type: 3}
 --- !u!114 &667171691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3e77dfefe2c6349823a81f3660d235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blockPrefab: {fileID: 7457572445569342514, guid: 3a3c8d81398c0e142b2ba38195a04e1c, type: 3}
   _camera: {fileID: 519420031}
 --- !u!1 &1658871832
 GameObject:

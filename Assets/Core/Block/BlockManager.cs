@@ -1,6 +1,7 @@
+using UnityEngine;
 using Zenject;
 
-public class BlockManager: IInitializable, ITickable
+public class BlockManager : IInitializable
 {
     private readonly BlockView _blockView;
     private readonly BlockModel _blockModel;
@@ -13,9 +14,39 @@ public class BlockManager: IInitializable, ITickable
 
     public void Initialize()
     {
+        _blockView.Init();
+        _blockView.BlockManager = this;
+        _blockView.SetColor(GameManager.BlockColor);
+        _blockView.SetSpriteEnabled(_blockModel.GetRandomIsAlive);
     }
 
-    public void Tick()
+    public void SetBlockPosition(Vector2 blockPosition)
     {
+        _blockView.SetPosition(blockPosition);
+    }
+
+    public bool IsAlive
+    {
+        get
+        {
+            return _blockModel.IsAlive;
+        }
+        set
+        {
+            _blockModel.IsAlive = value;
+            _blockView.SetSpriteEnabled(_blockModel.IsAlive);
+        }
+    }
+
+    public int NumNeighbors
+    {
+        get
+        {
+            return _blockModel.NumNeighbors;
+        }
+        set
+        {
+            _blockModel.NumNeighbors = value;
+        }
     }
 }

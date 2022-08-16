@@ -1,10 +1,10 @@
 using UnityEngine;
-
 public class BlockView : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
+    public BlockManager BlockManager { get; set; }
 
-    private void Awake()
+    public void Init()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -17,5 +17,10 @@ public class BlockView : MonoBehaviour
     public void SetSpriteEnabled(bool isEnabled)
     {
         _spriteRenderer.enabled = isEnabled;
+    }
+
+    public void SetPosition(Vector2 position)
+    {
+        transform.position = position;
     }
 }

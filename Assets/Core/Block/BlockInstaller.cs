@@ -1,10 +1,11 @@
 using Zenject;
-public class BlockInstaller : MonoInstaller
+
+public class BlockInstaller : Installer<BlockInstaller>
 {
     public override void InstallBindings()
     {
+        Container.Bind<BlockView>().FromNewComponentOnRoot().AsSingle();
         Container.Bind<BlockModel>().AsSingle();
-        Container.Bind<BlockView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<BlockManager>().AsSingle().NonLazy();
     }
 }

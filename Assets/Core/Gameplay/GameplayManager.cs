@@ -1,30 +1,29 @@
-using UnityEngine;
 using Zenject;
 
 public class GameplayManager : IInitializable, ITickable
 {
-    private readonly GameplayView _gameView;
-    private readonly GameplayModel _gameModel;
+    private readonly GameplayView _gameplayView;
+    private readonly GameplayModel _gameplayModel;
 
     public GameplayManager(GameplayView gameView, GameplayModel gameModel)
     {
-        _gameView = gameView;
-        _gameModel = gameModel;
+        _gameplayView = gameView;
+        _gameplayModel = gameModel;
     }
 
     public void Initialize()
     {
-        _gameModel.PopulateBlocks(_gameView.BlockPrefab);
+        _gameplayModel.PopulateBlocks();
         AdjustCamera();
     }
 
     public void AdjustCamera()
     {
-        _gameView.SetCamera(_gameModel.GetCameraOrthoSize(_gameView.GetCameraAspect, _gameView.GetCameraPixelWidth, _gameView.GetCameraPixelHeight), _gameModel.GetCameraPosition);
+        _gameplayView.SetCamera(_gameplayModel.GetCameraOrthoSize(_gameplayView.GetCameraAspect, _gameplayView.GetCameraPixelWidth, _gameplayView.GetCameraPixelHeight), _gameplayModel.GetCameraPosition);
     }
 
     public void Tick()
     {
-        _gameModel.Tick();
+        _gameplayModel.Tick();
     }
 }
