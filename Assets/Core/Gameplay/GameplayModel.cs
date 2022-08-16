@@ -35,23 +35,6 @@ public class GameplayModel
         return false;
     }
 
-    //fit grid on camera
-    //reference https://stackoverflow.com/a/71013983
-    public void AdjustCamera(Camera camera)
-    {
-        //center the camera
-        camera.transform.position = new Vector3(_grid.GetLength(0) / 2, _grid.GetLength(1) / 2, camera.transform.position.z);
-
-        if (GameManager.GridWidth > GameManager.GridHeight * camera.aspect)
-        {
-            camera.orthographicSize = ((float)GameManager.GridWidth / (float)camera.pixelWidth * camera.pixelHeight) / 2;
-        }
-        else
-        {
-            camera.orthographicSize = GameManager.GridHeight / 2;
-        }
-    }
-
     public Vector2 GetCameraPosition
     {
         get

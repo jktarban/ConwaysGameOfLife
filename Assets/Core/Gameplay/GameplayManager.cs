@@ -20,7 +20,7 @@ public class GameplayManager : IInitializable, ITickable
 
     public void AdjustCamera()
     {
-        _gameView.SetCamera(_gameModel.GetCameraOrthoSize(_gameView.Camera.aspect, _gameView.Camera.pixelWidth, _gameView.Camera.pixelHeight), _gameModel.GetCameraPosition);
+        _gameView.SetCamera(_gameModel.GetCameraOrthoSize(_gameView.GetCameraAspect, _gameView.GetCameraPixelWidth, _gameView.GetCameraPixelHeight), _gameModel.GetCameraPosition);
     }
 
     public void Tick()
