@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class BlockView : MonoBehaviour
 {
@@ -22,5 +23,10 @@ public class BlockView : MonoBehaviour
     public void SetPosition(Vector2 position)
     {
         transform.position = position;
+    }
+
+    internal void SetParent(Transform parent)
+    {
+        transform.SetParent(parent);
     }
 }

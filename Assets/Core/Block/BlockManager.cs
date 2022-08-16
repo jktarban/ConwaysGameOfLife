@@ -20,6 +20,11 @@ public class BlockManager : IInitializable
         _blockView.SetSpriteEnabled(_blockModel.GetRandomIsAlive);
     }
 
+    public void SetParent(Transform parent)
+    {
+        _blockView.SetParent(parent);
+    }
+
     public void SetBlockPosition(Vector2 blockPosition)
     {
         _blockView.SetPosition(blockPosition);

@@ -9,23 +9,29 @@ public class GameplayModel
     private float _timer = 0;
     private BlockManager[,] _grid;
     private bool _isGameStart = false;
+   
     [Inject]
-    private BlockFactory blockFactory;
+    private readonly BlockFactory _blockFactory;
+    [Inject]
+    private readonly PoolManager _poolManager;
 
     public void PopulateBlocks()
     {
+        _poolManager.Reset();
         _grid = new BlockManager[GameManager.GridWidth, GameManager.GridHeight];
-
+       
         for (int height = 0; height < GameManager.GridHeight; height++)
         {
             for (int width = 0; width < GameManager.GridWidth; width++)
             {
-                var blockManager = blockFactory.Create().BlockManager;
+                var blockManager = _blockFactory.Create().BlockManager;
                 blockManager.SetBlockPosition(new Vector2(width, height));
+                blockManager.SetParent(_poolManager.GetContainer);
                 _grid[width, height] = blockManager;
             }
         }
     }
+
 
     public void IsGameStart(bool isGameStart)
     {

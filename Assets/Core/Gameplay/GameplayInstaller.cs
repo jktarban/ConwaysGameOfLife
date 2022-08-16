@@ -13,6 +13,10 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<GameplayView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle().NonLazy();
 
+        Container.Bind<PoolModel>().AsSingle();
+        Container.Bind<PoolView>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<PoolManager>().AsSingle().NonLazy();
+
         Container.Bind<MenuModel>().AsSingle();
         Container.Bind<MenuView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<MenuManager>().AsSingle().NonLazy();
