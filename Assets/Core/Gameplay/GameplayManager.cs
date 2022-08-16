@@ -1,6 +1,6 @@
 using Zenject;
 
-public class GameplayManager : ITickable
+public class GameplayManager : ITickable, IGameplayManager
 {
     private readonly GameplayView _gameplayView;
     private readonly GameplayModel _gameplayModel;
@@ -18,7 +18,7 @@ public class GameplayManager : ITickable
         _gameplayModel.IsGameStart(true);
     }
 
-    public void AdjustCamera()
+    private void AdjustCamera()
     {
         _gameplayView.SetCamera(_gameplayModel.GetCameraOrthoSize(_gameplayView.GetCameraAspect, _gameplayView.GetCameraPixelWidth, _gameplayView.GetCameraPixelHeight), _gameplayModel.GetCameraPosition);
     }

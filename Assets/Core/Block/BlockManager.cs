@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class BlockManager : IInitializable
+public class BlockManager : IInitializable, IBlockManager
 {
     private readonly BlockView _blockView;
     private readonly BlockModel _blockModel;

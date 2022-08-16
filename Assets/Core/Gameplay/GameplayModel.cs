@@ -3,24 +3,24 @@ using Zenject;
 public class GameplayModel
 {
     private float _timer = 0;
-    private BlockManager[,] _grid;
+    private IBlockManager[,] _grid;
     private bool _isGameStart = false;
    
     [Inject]
     private readonly BlockFactory _blockFactory;
     [Inject]
-    private readonly PoolManager _poolManager;
+    private readonly IPoolManager _poolManager;
 
     public void PopulateBlocks()
     {
         _poolManager.Reset();
-        _grid = new BlockManager[GameManager.GridWidth, GameManager.GridHeight];
+        _grid = new IBlockManager[GameManager.GridWidth, GameManager.GridHeight];
        
         for (int height = 0; height < GameManager.GridHeight; height++)
         {
             for (int width = 0; width < GameManager.GridWidth; width++)
             {
-                var blockManager = _poolManager.GetFromPool();
+                IBlockManager blockManager = _poolManager.GetFromPool();
                 
                 if (blockManager == null)
                 {
@@ -40,7 +40,6 @@ public class GameplayModel
         _isGameStart = isGameStart;
     }
    
-
     public Vector2 GetCameraPosition
     {
         get
@@ -59,7 +58,6 @@ public class GameplayModel
         return GameManager.GridHeight / 2;
     }
 
-   
     public void Tick()
     {
         if (!_isGameStart)
@@ -79,6 +77,7 @@ public class GameplayModel
         }
     }
 
+    //reference https://www.youtube.com/watch?v=BHqfkMu1Syw&list=PLiRrp7UEG13YiTwVr1wPnYtTvt12ZKg1r&index=2
     private void CountNeighbors()
     {
         for (int height = 0; height < GameManager.GridHeight; height++)
@@ -164,9 +163,9 @@ public class GameplayModel
         }
     }
 
+    //reference https://www.youtube.com/watch?v=BHqfkMu1Syw&list=PLiRrp7UEG13YiTwVr1wPnYtTvt12ZKg1r&index=2
     private void PopulationControl()
     {
-       
         for (int height = 0; height < GameManager.GridHeight; height++)
         {
             for (int width = 0; width < GameManager.GridWidth; width++)

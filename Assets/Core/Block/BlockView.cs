@@ -3,7 +3,7 @@ using UnityEngine;
 public class BlockView : MonoBehaviour
 {
     private SpriteRenderer _spriteRenderer;
-    public BlockManager BlockManager { get; set; }
+    public IBlockManager BlockManager { get; set; }
 
     public void Init()
     {

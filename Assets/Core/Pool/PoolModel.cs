@@ -16,7 +16,7 @@ public class PoolModel
         }
     }
 
-    public BlockManager GetFromPool(Transform container)
+    public IBlockManager GetFromPool(Transform container)
     {
         foreach (Transform child in container)
         {

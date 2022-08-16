@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager
+public class PoolManager: IPoolManager
 {
     private readonly PoolView _poolView;
     private readonly PoolModel _poolModel;
@@ -19,7 +18,7 @@ public class PoolManager
         _poolModel.Reset(_poolView.transform);
     }
 
-    public BlockManager GetFromPool()
+    public IBlockManager GetFromPool()
     {
         return _poolModel.GetFromPool(_poolView.transform);
     }
