@@ -9,10 +9,25 @@ public class PoolModel
         {
             if (child.gameObject.activeInHierarchy)
             {
-                child.GetComponent<BlockManager>().IsAlive = false;
+                child.GetComponent<BlockView>().BlockManager.IsAlive = false;
                 child.gameObject.SetActive(false);
             }
           
         }
+    }
+
+    public BlockManager GetFromPool(Transform container)
+    {
+        foreach (Transform child in container)
+        {
+            if (child.gameObject.activeInHierarchy)
+            {
+                continue;
+            }
+            child.gameObject.SetActive(true);
+            return child.GetComponent<BlockView>().BlockManager;
+        }
+
+        return null;
     }
 }

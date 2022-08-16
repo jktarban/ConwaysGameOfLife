@@ -24,14 +24,20 @@ public class GameplayModel
         {
             for (int width = 0; width < GameManager.GridWidth; width++)
             {
-                var blockManager = _blockFactory.Create().BlockManager;
+                var blockManager = _poolManager.GetFromPool();
+                
+                if (blockManager == null)
+                {
+                    blockManager = _blockFactory.Create().BlockManager;
+                }
+
+                blockManager.Init();
                 blockManager.SetBlockPosition(new Vector2(width, height));
                 blockManager.SetParent(_poolManager.GetContainer);
                 _grid[width, height] = blockManager;
             }
         }
     }
-
 
     public void IsGameStart(bool isGameStart)
     {

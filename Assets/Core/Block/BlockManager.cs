@@ -16,6 +16,10 @@ public class BlockManager : IInitializable
     {
         _blockView.Init();
         _blockView.BlockManager = this;
+    }
+
+    public void Init()
+    {
         _blockView.SetColor(GameManager.BlockColor);
         _blockView.SetSpriteEnabled(_blockModel.GetRandomIsAlive);
     }

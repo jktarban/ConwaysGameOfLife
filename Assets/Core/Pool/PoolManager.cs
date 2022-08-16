@@ -18,4 +18,9 @@ public class PoolManager
     {
         _poolModel.Reset(_poolView.transform);
     }
+
+    public BlockManager GetFromPool()
+    {
+        return _poolModel.GetFromPool(_poolView.transform);
+    }
 }
