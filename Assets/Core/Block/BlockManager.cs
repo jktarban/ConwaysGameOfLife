@@ -3,10 +3,10 @@ using Zenject;
 
 public class BlockManager : IInitializable, IBlockManager
 {
-    private readonly BlockView _blockView;
-    private readonly BlockModel _blockModel;
+    private readonly IBlockView _blockView;
+    private readonly IBlockModel _blockModel;
 
-    public BlockManager(BlockView blockView, BlockModel blockModel)
+    public BlockManager(IBlockView blockView, IBlockModel blockModel)
     {
         _blockView = blockView;
         _blockModel = blockModel;
@@ -29,7 +29,7 @@ public class BlockManager : IInitializable, IBlockManager
         _blockView.SetParent(parent);
     }
 
-    public void SetBlockPosition(Vector2 blockPosition)
+    public void SetPosition(Vector2 blockPosition)
     {
         _blockView.SetPosition(blockPosition);
     }

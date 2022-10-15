@@ -1,10 +1,6 @@
 using UnityEngine;
 
-public interface IBlockManager
+public interface IBlockManager: IInit, IIsAlive, INumNeighbors, ISetParent, ISetPosition
 {
-    void Init();
-    void SetParent(Transform parent);
-    void SetBlockPosition(Vector2 blockPosition);
-    bool IsAlive { get; set; }
-    int NumNeighbors { get; set; }
+   
 }

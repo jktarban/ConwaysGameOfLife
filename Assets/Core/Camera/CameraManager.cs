@@ -11,9 +11,8 @@ public class CameraManager : ICameraManager
         _cameraModel = cameraModel;
     }
 
-    public void SetCamera(Vector2 cameraPosition)
+    public void SetPosition(Vector2 position)
     {
-        _cameraView.SetCamera(_cameraModel.GetCameraOrthoSize(_cameraView.GetCameraAspect, _cameraView.GetCameraPixelWidth, _cameraView.GetCameraPixelHeight), cameraPosition);
-      
+        _cameraView.SetCamera(_cameraModel.GetCameraOrthoSize(_cameraView.GetCameraAspect, _cameraView.GetCameraPixelWidth, _cameraView.GetCameraPixelHeight), position);
     }
 }

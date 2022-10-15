@@ -1,6 +1,3 @@
-using UnityEngine;
-
-public interface ICameraManager
+public interface ICameraManager: ISetPosition
 {
-    void SetCamera(Vector2 cameraPosition);
 }

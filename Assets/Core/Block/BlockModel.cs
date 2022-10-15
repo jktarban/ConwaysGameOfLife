@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class BlockModel
+public class BlockModel: IBlockModel
 {
     public bool IsAlive { get; set; } = false;
     public int NumNeighbors { get; set; } = 0;
 
+    //0-100% range to return is alive
     public bool GetRandomIsAlive
     {
         get

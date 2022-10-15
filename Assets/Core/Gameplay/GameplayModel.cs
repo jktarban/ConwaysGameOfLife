@@ -15,7 +15,7 @@ public class GameplayModel
 
     public void AdjustCamera()
     {
-        _cameraManager.SetCamera(GetCameraPosition);
+        _cameraManager.SetPosition(GetCameraPosition);
     }
 
     public void PopulateBlocks()
@@ -35,7 +35,7 @@ public class GameplayModel
                 }
 
                 blockManager.Init();
-                blockManager.SetBlockPosition(new Vector2(width, height));
+                blockManager.SetPosition(new Vector2(width, height));
                 blockManager.SetParent(_poolManager.GetContainer);
                 _grid[width, height] = blockManager;
             }
