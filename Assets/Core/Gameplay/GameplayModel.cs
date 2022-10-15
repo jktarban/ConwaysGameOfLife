@@ -55,8 +55,6 @@ public class GameplayModel
         }
     }
 
-  
-
     public void Tick()
     {
         if (!_isGameStart)
@@ -161,7 +159,6 @@ public class GameplayModel
         }
     }
 
-    //reference https://www.youtube.com/watch?v=BHqfkMu1Syw&list=PLiRrp7UEG13YiTwVr1wPnYtTvt12ZKg1r&index=2
     private void PopulationControl()
     {
         for (int height = 0; height < GameManager.GridHeight; height++)

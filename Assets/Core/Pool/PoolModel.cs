@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PoolModel
@@ -12,7 +11,6 @@ public class PoolModel
                 child.GetComponent<BlockView>().BlockManager.IsAlive = false;
                 child.gameObject.SetActive(false);
             }
-          
         }
     }
 

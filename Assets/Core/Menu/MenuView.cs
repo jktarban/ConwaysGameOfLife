@@ -57,9 +57,13 @@ public class MenuView : MonoBehaviour
         _colorDropDown.AddOptions(colorOptions);
     }
 
-    public string GetGridWidth => _gridXIField.text;
-    public string GetGridHeight => _gridYIField.text;
-    public string GetSpeed => _speedIField.text;
-    public string GetAlivePercent => _alivePercentIField.text;
-    public string GetColor => _colorDropDown.value.ToString();
+    public GameManagerBuilder GetMenuModelBuilder => new GameManagerBuilder
+    {
+        BlockColor = _colorDropDown.value.ToString(),
+        AlivePercent = _alivePercentIField.text,
+        Speed = _speedIField.text,
+        GridWidth = _gridXIField.text,
+        GridHeight = _gridYIField.text
+
+    };
 }

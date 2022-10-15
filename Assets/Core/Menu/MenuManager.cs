@@ -23,11 +23,7 @@ public class MenuManager: IInitializable
 
     private void StartGame()
     {
-        _menuModel.SetColor(_menuView.GetColor);
-        _menuModel.SetGridWidth(_menuView.GetGridWidth);
-        _menuModel.SetGridHeight(_menuView.GetGridHeight);
-        _menuModel.SetSpeed(_menuView.GetSpeed);
-        _menuModel.SetAlivePercent(_menuView.GetAlivePercent);
+        _menuView.GetMenuModelBuilder.Build();
         _menuModel.StartGame();
     }
 }

@@ -14,7 +14,6 @@ public class GameplayInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().NonLazy();
 
         Container.Bind<GameplayModel>().AsSingle();
-        Container.Bind<GameplayView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle().NonLazy();
 
         Container.Bind<PoolModel>().AsSingle();
