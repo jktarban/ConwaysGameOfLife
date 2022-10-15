@@ -10,6 +10,13 @@ public class GameplayModel
     private readonly BlockFactory _blockFactory;
     [Inject]
     private readonly IPoolManager _poolManager;
+    [Inject]
+    private readonly ICameraManager _cameraManager;
+
+    public void AdjustCamera()
+    {
+        _cameraManager.SetCamera(GetCameraPosition);
+    }
 
     public void PopulateBlocks()
     {
@@ -40,7 +47,7 @@ public class GameplayModel
         _isGameStart = isGameStart;
     }
    
-    public Vector2 GetCameraPosition
+    private Vector2 GetCameraPosition
     {
         get
         {
@@ -48,15 +55,7 @@ public class GameplayModel
         }
     }
 
-    public float GetCameraOrthoSize(float cameraAspect, float pixelWidth, float pixelHeight)
-    {
-        if (GameManager.GridWidth > GameManager.GridHeight * cameraAspect)
-        {
-            return (GameManager.GridWidth / (float)pixelWidth * pixelHeight) / 2;
-        }
-
-        return GameManager.GridHeight / 2;
-    }
+  
 
     public void Tick()
     {
@@ -77,7 +76,6 @@ public class GameplayModel
         }
     }
 
-    //reference https://www.youtube.com/watch?v=BHqfkMu1Syw&list=PLiRrp7UEG13YiTwVr1wPnYtTvt12ZKg1r&index=2
     private void CountNeighbors()
     {
         for (int height = 0; height < GameManager.GridHeight; height++)

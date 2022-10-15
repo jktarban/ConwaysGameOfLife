@@ -123,61 +123,13 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &7132407658746860946
+--- !u!1001 &1673184243
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 58599526, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_ContentType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 58599526, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_KeyboardType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 58599526, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_CharacterValidation
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 348630792, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_ContentType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 348630792, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_KeyboardType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 348630792, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_CharacterValidation
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457215809, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_ContentType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457215809, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_KeyboardType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1457215809, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_CharacterValidation
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1697849884, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_ContentType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1697849884, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_KeyboardType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1697849884, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
-      propertyPath: m_CharacterValidation
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2013478017310355472, guid: 6c79afb9e667a044abf347edaeabb3d0, type: 3}
       propertyPath: m_RootOrder
       value: 0

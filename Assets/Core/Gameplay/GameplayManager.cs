@@ -14,14 +14,10 @@ public class GameplayManager : ITickable, IGameplayManager
     public void StartGame()
     {
         _gameplayModel.PopulateBlocks();
-        AdjustCamera();
+        _gameplayModel.AdjustCamera();
         _gameplayModel.IsGameStart(true);
     }
 
-    private void AdjustCamera()
-    {
-        _gameplayView.SetCamera(_gameplayModel.GetCameraOrthoSize(_gameplayView.GetCameraAspect, _gameplayView.GetCameraPixelWidth, _gameplayView.GetCameraPixelHeight), _gameplayModel.GetCameraPosition);
-    }
 
     public void Tick()
     {

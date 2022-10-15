@@ -9,6 +9,10 @@ public class GameplayInstaller : MonoInstaller
     {
         Container.BindFactory<BlockView, BlockFactory>().FromSubContainerResolve().ByNewPrefabInstaller<BlockInstaller>(blockPrefab);
 
+        Container.Bind<CameraModel>().AsSingle();
+        Container.Bind<CameraView>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().NonLazy();
+
         Container.Bind<GameplayModel>().AsSingle();
         Container.Bind<GameplayView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle().NonLazy();
