@@ -1,11 +1,11 @@
 using Zenject;
 
-public class MenuManager: IInitializable
+public class MenuManager: IInitializable, IMenuManager
 {
-    private readonly MenuView _menuView;
-    private readonly MenuModel _menuModel;
+    private readonly IMenuView _menuView;
+    private readonly IMenuModel _menuModel;
 
-    public MenuManager(MenuView menuView, MenuModel menuModel)
+    public MenuManager(IMenuView menuView, IMenuModel menuModel)
     {
         _menuView = menuView;
         _menuModel = menuModel;
@@ -19,7 +19,8 @@ public class MenuManager: IInitializable
 
     private void StartGame()
     {
-        _menuView.GetMenuModelBuilder.Build();
+        IBuilder builder = _menuView.GetGameManagerBuilder;
+        builder.Build();
         _menuModel.StartGame();
     }
 }

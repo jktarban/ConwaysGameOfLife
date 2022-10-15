@@ -1,10 +1,10 @@
-public class GameManagerBuilder
+public class GameManagerBuilder: IGameManagerBuilder
 {
-    public string BlockColor;
-    public string AlivePercent;
-    public string Speed;
-    public string GridHeight;
-    public string GridWidth;
+    public string BlockColor { get; set; }
+    public string AlivePercent { get; set; }
+    public string Speed { get; set; }
+    public string GridHeight { get; set; }
+    public string GridWidth { get; set; }
 
     public void Build()
     {

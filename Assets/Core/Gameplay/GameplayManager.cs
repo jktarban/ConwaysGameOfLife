@@ -2,9 +2,9 @@ using Zenject;
 
 public class GameplayManager : ITickable, IGameplayManager
 {
-    private readonly GameplayModel _gameplayModel;
+    private readonly IGameplayModel _gameplayModel;
 
-    public GameplayManager(GameplayModel gameplayModel)
+    public GameplayManager(IGameplayModel gameplayModel)
     {
         _gameplayModel = gameplayModel;
     }

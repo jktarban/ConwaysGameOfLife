@@ -2,24 +2,24 @@ using UnityEngine;
 
 public class PoolManager: IPoolManager
 {
-    private readonly PoolView _poolView;
-    private readonly PoolModel _poolModel;
+    private readonly IPoolView _poolView;
+    private readonly IPoolModel _poolModel;
 
-    public PoolManager(PoolView poolView, PoolModel poolModel)
+    public PoolManager(IPoolView poolView, IPoolModel poolModel)
     {
         _poolView = poolView;
         _poolModel = poolModel;
     }
 
-    public Transform GetContainer => _poolView.transform;
+    public Transform GetContainer => _poolView.Transform;
 
     public void Reset()
     {
-        _poolModel.Reset(_poolView.transform);
+        _poolModel.Reset(_poolView.Transform);
     }
 
     public IBlockManager GetFromPool()
     {
-        return _poolModel.GetFromPool(_poolView.transform);
+        return _poolModel.GetFromPool(_poolView.Transform);
     }
 }

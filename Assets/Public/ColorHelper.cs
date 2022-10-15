@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class ColorHelper
@@ -39,6 +40,21 @@ public static class ColorHelper
         }
 
         return color;
+    }
+
+    public static List<string> GetColorList
+    {
+        get
+        {
+            List<string> colors = new();
+
+            foreach (EnumColors color in Enum.GetValues(typeof(EnumColors)))
+            {
+                colors.Add(color.ToString());
+            }
+
+            return colors;
+        }
     }
 
     public enum EnumColors

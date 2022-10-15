@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class MenuView : MonoBehaviour
+public class MenuView : MonoBehaviour, IMenuView
 {
     private Action _onClickStartButton;
 
@@ -32,7 +32,7 @@ public class MenuView : MonoBehaviour
         _startButtonText.text = Restart;
     }
 
-    public void SetMenu(MenuViewBuilder menuViewBuilder)
+    public void SetMenu(IMenuViewBuilder menuViewBuilder)
     {
         menuViewBuilder.GridXIField = _gridXIField;
         menuViewBuilder.GridYIField = _gridYIField;
@@ -42,7 +42,7 @@ public class MenuView : MonoBehaviour
         menuViewBuilder.Build();
     }
 
-    public GameManagerBuilder GetMenuModelBuilder => new()
+    public GameManagerBuilder GetGameManagerBuilder => new()
     {
         BlockColor = _colorDropDown.value.ToString(),
         AlivePercent = _alivePercentIField.text,

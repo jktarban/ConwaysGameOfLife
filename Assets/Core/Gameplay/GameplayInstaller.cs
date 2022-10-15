@@ -9,19 +9,19 @@ public class GameplayInstaller : MonoInstaller
     {
         Container.BindFactory<BlockView, BlockFactory>().FromSubContainerResolve().ByNewPrefabInstaller<BlockInstaller>(blockPrefab);
 
-        Container.Bind<CameraModel>().AsSingle();
-        Container.Bind<CameraView>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<CameraModel>().AsSingle();
+        Container.BindInterfacesAndSelfTo<CameraView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<CameraManager>().AsSingle().NonLazy();
 
-        Container.Bind<GameplayModel>().AsSingle();
+        Container.BindInterfacesAndSelfTo<GameplayModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle().NonLazy();
 
-        Container.Bind<PoolModel>().AsSingle();
-        Container.Bind<PoolView>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<PoolModel>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PoolView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<PoolManager>().AsSingle().NonLazy();
 
-        Container.Bind<MenuModel>().AsSingle();
-        Container.Bind<MenuView>().FromComponentInHierarchy().AsSingle();
+        Container.BindInterfacesAndSelfTo<MenuModel>().AsSingle();
+        Container.BindInterfacesAndSelfTo<MenuView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<MenuManager>().AsSingle().NonLazy();
     }
 }

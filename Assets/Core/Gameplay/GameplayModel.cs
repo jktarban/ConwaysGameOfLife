@@ -1,6 +1,6 @@
 using UnityEngine;
 using Zenject;
-public class GameplayModel
+public class GameplayModel: IGameplayModel
 {
     private float _timer = 0;
     private IBlockManager[,] _grid;

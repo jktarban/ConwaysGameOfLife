@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 
-public class MenuViewBuilder: IMenuViewBuilder
+public interface IMenuViewBuilder: IBuilder
 {
     public TMP_InputField GridXIField { get; set; }
     public TMP_InputField GridYIField { get; set; }
@@ -14,14 +14,4 @@ public class MenuViewBuilder: IMenuViewBuilder
     public string SpeedText { get; set; }
     public string AlivePercentText { get; set; }
     public List<string> ColorOptions { get; set; }
-
-    public void Build()
-    {
-        GridXIField.text = GridXText;
-        GridYIField.text = GridYText;
-        SpeedIField.text = SpeedText;
-        AlivePercentIField.text = AlivePercentText;
-        ColorDropDown.ClearOptions();
-        ColorDropDown.AddOptions(ColorOptions);
-    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PoolModel
+public class PoolModel: IPoolModel
 {
     public void Reset(Transform container)
     {

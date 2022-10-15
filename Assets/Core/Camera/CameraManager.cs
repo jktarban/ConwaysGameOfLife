@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class CameraManager : ICameraManager
 {
-    private readonly CameraView _cameraView;
-    private readonly CameraModel _cameraModel;
+    private readonly ICameraView _cameraView;
+    private readonly ICameraModel _cameraModel;
 
-    public CameraManager(CameraView cameraView, CameraModel cameraModel)
+    public CameraManager(ICameraView cameraView, ICameraModel cameraModel)
     {
         _cameraView = cameraView;
         _cameraModel = cameraModel;
@@ -13,6 +13,6 @@ public class CameraManager : ICameraManager
 
     public void SetPosition(Vector2 position)
     {
-        _cameraView.SetCamera(_cameraModel.GetCameraOrthoSize(_cameraView.GetCameraAspect, _cameraView.GetCameraPixelWidth, _cameraView.GetCameraPixelHeight), position);
+        _cameraView.SetPosition(position);
     }
 }

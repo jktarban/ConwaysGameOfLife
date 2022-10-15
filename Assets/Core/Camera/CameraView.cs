@@ -1,37 +1,21 @@
 using UnityEngine;
 
-public class CameraView : MonoBehaviour
+public class CameraView : MonoBehaviour, ICameraView
 {
     [SerializeField]
     private Camera _camera;
 
-    public void SetCamera(float orthoSize, Vector2 cameraPosition)
+    public void SetPosition(Vector2 position)
     {
-        _camera.orthographicSize = orthoSize;
-        _camera.transform.position = new Vector3(cameraPosition.x, cameraPosition.y, _camera.transform.position.z);
-    }
-
-    public float GetCameraAspect
-    {
-        get
+        ICameraBuilder cameraBuilder = new CameraBuilder()
         {
-            return _camera.aspect;
-        }
-    }
+            Camera = _camera,
+            Position = position,
+            CameraAspect = _camera.aspect,
+            CameraPixelWidth = _camera.pixelWidth,
+            CameraPixelHeight = _camera.pixelHeight
+        };
 
-    public float GetCameraPixelWidth
-    {
-        get
-        {
-            return _camera.pixelWidth;
-        }
-    }
-
-    public float GetCameraPixelHeight
-    {
-        get
-        {
-            return _camera.pixelHeight;
-        }
+        cameraBuilder.Build();
     }
 }
