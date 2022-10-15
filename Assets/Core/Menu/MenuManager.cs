@@ -14,11 +14,7 @@ public class MenuManager: IInitializable
     public void Initialize()
     {
         _menuView.SetOnClickStartButton(StartGame);
-        _menuView.SetGridXIField(_menuModel.GetGridWidth);
-        _menuView.SetGridYIField(_menuModel.GetGridHeight);
-        _menuView.SetAlivePercentIField(_menuModel.GetAlivePercent);
-        _menuView.SetSpeedIField(_menuModel.GetSpeed);
-        _menuView.SetColorDropDown(_menuModel.GetColorList);
+        _menuView.SetMenu(_menuModel.GetMenuViewBuilder);
     }
 
     private void StartGame()

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 using static ColorHelper;
 
@@ -13,7 +12,20 @@ public class MenuModel
         _gameplayManager.StartGame();
     }
 
-    public List<string> GetColorList
+    public MenuViewBuilder GetMenuViewBuilder { get
+        {
+            return new MenuViewBuilder
+            {
+                ColorOptions = GetColorList,
+                GridXText = GameManager.GridWidth.ToString(),
+                GridYText = GameManager.GridHeight.ToString(),
+                SpeedText = GameManager.Speed.ToString(),
+                AlivePercentText = GameManager.AlivePercent.ToString(),
+            };
+        }
+    }
+
+    private List<string> GetColorList
     {
         get
         {
@@ -27,10 +39,4 @@ public class MenuModel
             return colors;
         }
     }
-
-    public string GetGridWidth => GameManager.GridWidth.ToString();
-    public string GetGridHeight => GameManager.GridHeight.ToString();
-    public string GetSpeed => GameManager.Speed.ToString();
-    public string GetAlivePercent => GameManager.AlivePercent.ToString();
-
 }
