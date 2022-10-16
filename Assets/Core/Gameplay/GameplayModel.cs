@@ -82,76 +82,22 @@ public class GameplayModel: IGameplayModel
             {
                 var numNeighbors = 0;
 
-                //North
-                if (height + GameSettings.Instance.CellSize < GameManager.GridHeight)
-                {
-                    if (_grid[width, height + 1].IsAlive)
-                    {
-                        numNeighbors++;
-                    }
-                }
+                //Array of neighborscheck
+                var neighborsCheck = new INeighborCheck[]{
+                    new NorthNeighborCheck(),
+                    new SouthNeighborCheck(),
+                    new EastNeighborCheck(),
+                    new WestNeighborCheck(),
+                    new NorthEastNeighborCheck(),
+                    new NorthWestNeighborCheck(),
+                    new SouthEastNeighborCheck(),
+                    new SouthWestNeighborCheck()
+                };
 
-                //EAST
-                if (width + GameSettings.Instance.CellSize < GameManager.GridWidth)
+                //loop through all implementing the interface and get numneighbors
+                foreach (var neighborCheck in neighborsCheck)
                 {
-                    if (_grid[width + GameSettings.Instance.CellSize, height].IsAlive)
-                    {
-                        numNeighbors++;
-                    }
-                }
-
-                //SOUTH
-                if (height - GameSettings.Instance.CellSize >= 0)
-                {
-                    if (_grid[width, height - GameSettings.Instance.CellSize].IsAlive)
-                    {
-                        numNeighbors++;
-                    }
-                }
-
-                //WEST
-                if (width - GameSettings.Instance.CellSize >= 0)
-                {
-                    if (_grid[width - GameSettings.Instance.CellSize, height].IsAlive)
-                    {
-                        numNeighbors++;
-                    }
-                }
-
-                //NORTHEAST
-                if (width + GameSettings.Instance.CellSize < GameManager.GridWidth && height + GameSettings.Instance.CellSize < GameManager.GridHeight)
-                {
-                    if (_grid[width + GameSettings.Instance.CellSize, height + GameSettings.Instance.CellSize].IsAlive)
-                    {
-                        numNeighbors++;
-                    }
-                }
-
-                //NORTHWEST
-                if (width - GameSettings.Instance.CellSize >= 0 && height + GameSettings.Instance.CellSize < GameManager.GridHeight)
-                {
-                    if (_grid[width - GameSettings.Instance.CellSize, height + GameSettings.Instance.CellSize].IsAlive)
-                    {
-                        numNeighbors++;
-                    }
-                }
-
-                //SOUTHEAST
-                if (width + GameSettings.Instance.CellSize < GameManager.GridWidth && height - GameSettings.Instance.CellSize >= 0)
-                {
-                    if (_grid[width + GameSettings.Instance.CellSize, height - GameSettings.Instance.CellSize].IsAlive)
-                    {
-                        numNeighbors++;
-                    }
-                }
-
-                //SOUTHWEST
-                if (width - GameSettings.Instance.CellSize >= 0 && height - GameSettings.Instance.CellSize >= 0)
-                {
-                    if (_grid[width - GameSettings.Instance.CellSize, height - GameSettings.Instance.CellSize].IsAlive)
-                    {
-                        numNeighbors++;
-                    }
+                    numNeighbors = neighborCheck.Check(height, width, numNeighbors, _grid);
                 }
 
                 _grid[width, height].NumNeighbors = numNeighbors;
@@ -176,7 +122,8 @@ public class GameplayModel: IGameplayModel
                     }
 
                     //RULE 2 lives to next generation
-                    if (_grid[width, height].NumNeighbors >= GameSettings.Instance.UnderPopulationCount && _grid[width, height].NumNeighbors == GameSettings.Instance.OverPopulationCount)
+                    if (_grid[width, height].NumNeighbors >= GameSettings.Instance.UnderPopulationCount && 
+                        _grid[width, height].NumNeighbors == GameSettings.Instance.OverPopulationCount)
                     {
                         _grid[width, height].IsAlive = true;
                     }
