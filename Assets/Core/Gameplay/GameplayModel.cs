@@ -93,8 +93,6 @@ public class GameplayModel : IGameplayModel
             {
                 var numNeighbors = 0;
 
-
-
                 //loop through all implementing the interface and get numneighbors
                 foreach (var neighborCheck in neighborsCheck)
                 {
@@ -114,6 +112,7 @@ public class GameplayModel : IGameplayModel
                     new PopulationRule3(),
                 };
 
+        //we separate 4th Rule since it is a dead block
         IPopulationRule populationRule4 = new PopulationRule4();
 
         for (int height = 0; height < GameManager.GridHeight; height++)
