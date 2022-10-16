@@ -1,4 +1,3 @@
-public interface IGameplayManager
+public interface IGameplayManager: IStartGame
 {
-    void StartGame();
 }

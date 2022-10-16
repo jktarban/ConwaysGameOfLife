@@ -11,9 +11,7 @@ public class GameplayManager : ITickable, IGameplayManager
 
     public void StartGame()
     {
-        _gameplayModel.PopulateBlocks();
-        _gameplayModel.AdjustCamera();
-        _gameplayModel.IsGameStart(true);
+        _gameplayModel.StartGame();
     }
 
 

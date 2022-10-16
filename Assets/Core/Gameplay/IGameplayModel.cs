@@ -1,7 +1,4 @@
-public interface IGameplayModel
+public interface IGameplayModel: IStartGame
 {
-    void AdjustCamera();
-    void PopulateBlocks();
-    void IsGameStart(bool isGameStart);
     void Tick();
 }

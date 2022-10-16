@@ -1,11 +1,11 @@
 using UnityEngine;
 using Zenject;
-public class GameplayModel: IGameplayModel
+public class GameplayModel : IGameplayModel
 {
     private float _timer = 0;
     private IBlockManager[,] _grid;
-    private bool _isGameStart = false;
-   
+    private bool _isStartGame = false;
+
     [Inject]
     private readonly BlockFactory _blockFactory;
     [Inject]
@@ -13,22 +13,26 @@ public class GameplayModel: IGameplayModel
     [Inject]
     private readonly ICameraManager _cameraManager;
 
-    public void AdjustCamera()
+
+    public void StartGame()
     {
+        //do not change order
+        PopulateBlocks();
         _cameraManager.SetPosition(GetCameraPosition);
+        _isStartGame = true;
     }
 
-    public void PopulateBlocks()
+    private void PopulateBlocks()
     {
         _poolManager.Reset();
         _grid = new IBlockManager[GameManager.GridWidth, GameManager.GridHeight];
-       
+
         for (int height = 0; height < GameManager.GridHeight; height++)
         {
             for (int width = 0; width < GameManager.GridWidth; width++)
             {
                 IBlockManager blockManager = _poolManager.GetFromPool();
-                
+
                 if (blockManager == null)
                 {
                     blockManager = _blockFactory.Create().BlockManager;
@@ -42,11 +46,6 @@ public class GameplayModel: IGameplayModel
         }
     }
 
-    public void IsGameStart(bool isGameStart)
-    {
-        _isGameStart = isGameStart;
-    }
-   
     private Vector2 GetCameraPosition
     {
         get
@@ -57,7 +56,7 @@ public class GameplayModel: IGameplayModel
 
     public void Tick()
     {
-        if (!_isGameStart)
+        if (!_isStartGame)
         {
             return;
         }
@@ -76,14 +75,8 @@ public class GameplayModel: IGameplayModel
 
     private void CountNeighbors()
     {
-        for (int height = 0; height < GameManager.GridHeight; height++)
-        {
-            for (int width = 0; width < GameManager.GridWidth; width++)
-            {
-                var numNeighbors = 0;
-
-                //Array of neighborscheck
-                var neighborsCheck = new INeighborCheck[]{
+        //Array of neighborscheck
+        var neighborsCheck = new INeighborCheck[]{
                     new NorthNeighborCheck(),
                     new SouthNeighborCheck(),
                     new EastNeighborCheck(),
@@ -93,6 +86,14 @@ public class GameplayModel: IGameplayModel
                     new SouthEastNeighborCheck(),
                     new SouthWestNeighborCheck()
                 };
+
+        for (int height = 0; height < GameManager.GridHeight; height++)
+        {
+            for (int width = 0; width < GameManager.GridWidth; width++)
+            {
+                var numNeighbors = 0;
+
+
 
                 //loop through all implementing the interface and get numneighbors
                 foreach (var neighborCheck in neighborsCheck)
@@ -107,40 +108,28 @@ public class GameplayModel: IGameplayModel
 
     private void PopulationControl()
     {
+        var populationRules = new IPopulationRule[]{
+                    new PopulationRule1(),
+                    new PopulationRule2(),
+                    new PopulationRule3(),
+                };
+
+        IPopulationRule populationRule4 = new PopulationRule4();
+
         for (int height = 0; height < GameManager.GridHeight; height++)
         {
             for (int width = 0; width < GameManager.GridWidth; width++)
             {
-
                 if (_grid[width, height].IsAlive)
                 {
-                   
-                    //RULE 1 underpopulation
-                    if (_grid[width, height].NumNeighbors < GameSettings.Instance.UnderPopulationCount)
+                    foreach (var populationRule in populationRules)
                     {
-                        _grid[width, height].IsAlive = false;
-                    }
-
-                    //RULE 2 lives to next generation
-                    if (_grid[width, height].NumNeighbors >= GameSettings.Instance.UnderPopulationCount && 
-                        _grid[width, height].NumNeighbors == GameSettings.Instance.OverPopulationCount)
-                    {
-                        _grid[width, height].IsAlive = true;
-                    }
-
-                    //RULE 3 overpopulation
-                    if (_grid[width, height].NumNeighbors > GameSettings.Instance.OverPopulationCount)
-                    {
-                        _grid[width, height].IsAlive = false;
+                        populationRule.Check(width, height, _grid);
                     }
                 }
                 else
                 {
-                    //RULE 4 reproduction
-                    if (_grid[width, height].NumNeighbors == GameSettings.Instance.OverPopulationCount)
-                    {
-                        _grid[width, height].IsAlive = true;
-                    }
+                    populationRule4.Check(width, height, _grid);
                 }
             }
         }
