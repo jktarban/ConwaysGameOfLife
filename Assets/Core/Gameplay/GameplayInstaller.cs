@@ -16,6 +16,9 @@ public class GameplayInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<GameplayModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<GameplayManager>().AsSingle().NonLazy();
 
+        Container.BindInterfacesAndSelfTo<PopulationModel>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PopulationManager>().AsSingle().NonLazy();
+
         Container.BindInterfacesAndSelfTo<PoolModel>().AsSingle();
         Container.BindInterfacesAndSelfTo<PoolView>().FromComponentInHierarchy().AsSingle();
         Container.BindInterfacesAndSelfTo<PoolManager>().AsSingle().NonLazy();

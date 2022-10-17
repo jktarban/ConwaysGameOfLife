@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 147
+  controlID: 54
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 146
+  controlID: 53
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 21
+  controlID: 23
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -244,8 +244,8 @@ MonoBehaviour:
     y: 0
     width: 706.4
     height: 399.2
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 59
+  controlID: 100
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -608,7 +608,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Core/Gameplay/PopulationRule
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -623,7 +624,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: da640000
     m_LastClickedID: 25818
-    m_ExpandedIDs: 00000000fe6c0000006d0000026d0000046d0000066d0000086d00000a6d00000c6d00000e6d0000106d0000126d0000146d0000166d0000
+    m_ExpandedIDs: 00000000386d00003a6d00003c6d00003e6d0000406d0000426d0000446d0000466d0000486d00004a6d00004c6d00004e6d0000506d0000526d0000546d0000566d0000586d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -648,24 +649,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 180}
+    scrollPos: {x: 0, y: 19.963423}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000fe6c0000006d0000026d0000046d0000066d0000086d00000a6d00000c6d00000e6d0000106d0000126d0000146d0000166d00007c6d0000be6d000096ad000006af0000
+    m_ExpandedIDs: ffffffff00000000386d00003a6d00003c6d00003e6d0000406d0000426d0000446d0000466d0000486d00004a6d00004c6d00004e6d0000506d0000526d0000546d0000566d0000586d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: ICameraBuilder
-      m_OriginalName: ICameraBuilder
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 46154
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 14}
     m_SearchString: 
@@ -832,8 +833,8 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -100, y: -25.600006}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: -100, y: -25.600006}
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -843,9 +844,9 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -141, y: -204.6}
+      snapOffset: {x: -141, y: 149}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 3
+      snapCorner: 1
       id: unity-grid-and-snap-toolbar
       index: 1
       layout: 1
@@ -854,7 +855,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 24.8}
+      snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-scene-view-toolbar
@@ -931,7 +932,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 0, y: 24.8}
+      snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Camera
@@ -1157,9 +1158,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 4ab40000
+      m_SelectedIDs: 04930000
       m_LastClickedID: 0
-      m_ExpandedIDs: 98ddfefff0defeff24fbffff26fbffff
+      m_ExpandedIDs: 26fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
